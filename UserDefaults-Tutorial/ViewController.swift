@@ -9,46 +9,43 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var passwordLabel: UITextField!
+    @IBOutlet weak var usernameLabel: UITextField!
+    
+    let d = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //d nesnesiyle veri kaydı, veri silme ve diğer zımbırtılar yapılabilir
-       let d = UserDefaults.standard
+        let uN = d.string(forKey: "user name") ?? "unknown user"
+        let pssw = d.string(forKey: "password") ?? "wrong password"
         
-        d.set("Damla", forKey: "name")
-        d.set(24, forKey: "age")
-        d.set(1.74, forKey: "height")
-        d.set(true, forKey: "does she work")
-        
-        let list = ["Çağla","Beyda","Sude","Hilal","Nurdan"]
-        
-        d.set(list, forKey: "people list")
-        
-        //userdefaults'ta dictionary veri türünü de kullanabiliyoruz
-        let cityList: [String:String] = ["16":"Bursa","14":"Bolu","34":"İstanbul","59":"Tekirdağ"]
-        d.set(cityList, forKey: "dict")
-        
-        //Veri okuma
-        
-        let name = d.string(forKey: "name") ?? "unknown"
-        let age = d.integer(forKey: "age")
-        let height = d.double(forKey: "height")
-        let work = d.bool(forKey: "does she work")
-        
-        //String bir diziye çevir eğer dönüşümde hata olursa boş bir dizi olsun
-        let peopleList = d.array(forKey: "people list") as? [String] ?? [String]()
-        let city = d.dictionary(forKey: "dict") as? [String:String] ?? [String:String]()
-        
-        print(peopleList[0])
-        print(city["14"]!)
-        
-        
-        
-        
-        
-        
+        if uN != "unknown user" && pssw != "wrong password" {
+            performSegue(withIdentifier: "goToHomePage", sender: nil)
+        }
+     
     }
 
-
+    @IBAction func loginPressed(_ sender: UIButton) {
+        
+        if let uN = usernameLabel.text, let pssw = passwordLabel.text {
+            
+            if uN == "admin" && pssw == "1234" {
+                d.set(uN, forKey: "user name")
+                d.set(pssw, forKey: "password")
+                performSegue(withIdentifier: "goToHomePage", sender: nil)
+            }else {
+                print("information is incorrect.")
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isToolbarHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.isToolbarHidden = false
+    }
+    
 }
 
