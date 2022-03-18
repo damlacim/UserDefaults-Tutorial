@@ -22,6 +22,7 @@ class ViewController2: UIViewController {
     }
     
 
+   
     @IBAction func logOutButton(_ sender: UIBarButtonItem) {
         d.removeObject(forKey: "user name")
         d.removeObject(forKey: "password")

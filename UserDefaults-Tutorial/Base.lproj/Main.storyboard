@@ -85,7 +85,7 @@
                     <navigationItem key="navigationItem" title="Home Page" id="Z4z-MA-sRh">
                         <barButtonItem key="rightBarButtonItem" title="Çıkış" id="1pk-Co-cgf">
                             <connections>
-                                <action selector="backButton:" destination="4pH-kS-zr7" id="wkt-ew-Lld"/>
+                                <action selector="logOutButton:" destination="4pH-kS-zr7" id="lgC-UV-Nxd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
